@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Rishtey</string>
+    <string name="upload_heading">Upload Your Biodata</string>
+    <string name="upload_subheading">Browse and choose the biodata you want to upload</string>
+    <string name="upload_subheading2">Max file size is 5MB</string>
+    <string name="step_1">STEP 1</string>
+    <string name="step_2">STEP 2</string>
+    <string name="search_content_desc">Search biodata on the basis of name</string>
+    <string name="search">Search</string>
+    <string name="menu_my_biodata">My Biodata</string>
+    <string name="menu_terms_privacy_policy"><![CDATA[Terms & Privacy Policy]]></string>
+    <string name="menu_share">Share</string>
+    <string name="menu_logout">Logout</string>
+    <string name="menu_home">Home</string>
+    <string name="upload_photo_heading">Upload Bride or Groom Photos</string>
+    <string name="upload_photo_subheading">Minimum 1 photo, Maximum 5 photos are allowed</string>
+    <string name="upload_photo_subheading2">Max photo size is 4MB</string>
+    <string name="cancel_upload">Cancel the importing process</string>
+    <string name="_0">0%</string>
+    <string name="verify_files_before_uploading">Verify Files Before Uploading</string>
+    <string name="below_files_will_be_uploaded">Below files will be uploaded</string>
+    <string name="biodata_pdf">Biodata.pdf</string>
+    <string name="image1_jpeg">Image1.jpeg</string>
+    <string name="image2_jpeg">Image2.jpeg</string>
+    <string name="image3_jpeg">Image3.jpeg</string>
+    <string name="image4_jpeg">Image4.jpeg</string>
+    <string name="upload">Upload</string>
+    <string name="image5_jpeg">Image5.jpeg</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
