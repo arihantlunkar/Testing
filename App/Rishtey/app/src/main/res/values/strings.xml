@@ -16,16 +16,17 @@
     <string name="upload_photo_subheading">Minimum 1 photo, Maximum 5 photos are allowed</string>
     <string name="upload_photo_subheading2">Max photo size is 4MB</string>
     <string name="cancel_upload">Cancel the importing process</string>
-    <string name="_0">0%</string>
-    <string name="verify_files_before_uploading">Verify Files Before Uploading</string>
-    <string name="below_files_will_be_uploaded">Below files will be uploaded</string>
-    <string name="biodata_pdf">Biodata.pdf</string>
-    <string name="image1_jpeg">Image1.jpeg</string>
-    <string name="image2_jpeg">Image2.jpeg</string>
-    <string name="image3_jpeg">Image3.jpeg</string>
-    <string name="image4_jpeg">Image4.jpeg</string>
-    <string name="upload">Upload</string>
-    <string name="image5_jpeg">Image5.jpeg</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
 </resources>

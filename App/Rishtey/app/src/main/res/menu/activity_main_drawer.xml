@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_my_biodata"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="My Biodata" />
+        <item
+            android:id="@+id/nav_upload_biodata"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Upload Biodata" />
+        <item
+            android:id="@+id/nav_ignored"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Blocked / Ignored" />
+        <item
+            android:id="@+id/nav_wishlist"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Wishlist" />
+        <item
+            android:id="@+id/nav_login_logout"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Logout" />
+    </group>
+</menu>

@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:layout_marginTop="6dp"
+    android:layout_marginBottom="2dp"
+    app:cardBackgroundColor="@color/background"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineH10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineH25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="113dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineH38"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.38" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineH50"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineH51"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.51" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineH64"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.64" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineH70"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="105dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineV5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineV95"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".95" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineV60"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".60" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:cardBackgroundColor="@color/background"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="15dp"
+            app:cardMaxElevation="15dp"
+            app:layout_constraintBottom_toBottomOf="@id/guidelineH50"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintStart_toStartOf="@id/guidelineV5"
+            app:layout_constraintTop_toTopOf="@id/guidelineH10">
+
+            <ImageView
+                android:id="@+id/profileImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/akshay_kumar" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/ProfileName"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="20dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/metropolis_bold"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="Akshay Kumar"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/guidelineH25"
+            app:layout_constraintEnd_toStartOf="@id/guidelineV95"
+            app:layout_constraintStart_toEndOf="@+id/cardView"
+            app:layout_constraintTop_toTopOf="@+id/guidelineH10" />
+
+        <TextView
+            android:id="@+id/ProfileProfession"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="20dp"
+            android:alpha="0.6"
+            android:ellipsize="end"
+            android:fontFamily="@font/metropolis_semibold"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="Software Professional - Graduate"
+            android:textColor="@color/colorOnBackground"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/guidelineH38"
+            app:layout_constraintEnd_toStartOf="@id/guidelineV95"
+            app:layout_constraintStart_toEndOf="@+id/cardView"
+            app:layout_constraintTop_toTopOf="@+id/guidelineH25" />
+
+        <TextView
+            android:id="@+id/ProfileAge"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="20dp"
+            android:alpha="0.6"
+            android:ellipsize="end"
+            android:fontFamily="@font/metropolis_semibold"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="29Yrs,"
+            android:textColor="@color/colorOnBackground"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/guidelineH51"
+            app:layout_constraintStart_toEndOf="@+id/cardView"
+            app:layout_constraintTop_toTopOf="@+id/guidelineH38" />
+
+        <TextView
+            android:id="@+id/ProfileHeight"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="5dp"
+            android:alpha="0.6"
+            android:ellipsize="end"
+            android:fontFamily="@font/metropolis_semibold"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="5ft 11 in"
+            android:textColor="@color/colorOnBackground"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/guidelineH51"
+            app:layout_constraintEnd_toStartOf="@id/guidelineV95"
+            app:layout_constraintStart_toEndOf="@id/ProfileAge"
+            app:layout_constraintTop_toTopOf="@+id/guidelineH38" />
+
+        <TextView
+            android:id="@+id/ProfileCast"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="20dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/metropolis_semibold"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="Shwetambar,"
+            android:textColor="@color/colorOnBackground"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/guidelineH64"
+            app:layout_constraintStart_toEndOf="@+id/cardView"
+            app:layout_constraintTop_toTopOf="@+id/guidelineH51" />
+
+        <TextView
+            android:id="@+id/ProfilePlace"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="5dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/metropolis_semibold"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="Maharahstra"
+            android:textColor="@color/colorOnBackground"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/guidelineH64"
+            app:layout_constraintEnd_toStartOf="@id/guidelineV95"
+            app:layout_constraintStart_toEndOf="@id/ProfileCast"
+            app:layout_constraintTop_toTopOf="@+id/guidelineH51" />
+
+
+        <View
+            android:id="@+id/bottomLine"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:alpha="0.05"
+            android:background="@drawable/line"
+            android:backgroundTint="@color/colorOnBackground"
+            app:layout_constraintBottom_toTopOf="@id/guidelineH70"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guidelineH70" />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/floatingActionButtonDownload"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:fontFamily="@font/metropolis_semibold"
+            android:gravity="center"
+            android:padding="0dp"
+            android:paddingStart="20dp"
+            android:paddingLeft="20dp"
+            android:paddingEnd="20dp"
+            android:paddingRight="20dp"
+            android:text="Download Biodata"
+            android:textAllCaps="false"
+            app:autoSizeMinTextSize="6sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/guidelineV95"
+            app:layout_constraintStart_toStartOf="@+id/guidelineV60"
+            app:layout_constraintTop_toTopOf="@+id/guidelineH70"
+            app:rippleColor="@color/colorSecondaryVariant" />
+
+
+        <FrameLayout
+            android:id="@+id/frameForInterested"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="@id/guidelineV5"
+            app:layout_constraintTop_toTopOf="@+id/guidelineH70"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButtonInterested"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="6dp"
+            android:backgroundTint="@color/colorOnPrimary"
+            android:elevation="0dp"
+            android:gravity="center"
+            app:borderWidth="1dp"
+            app:elevation="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/frameForInterested"
+            app:layout_constraintEnd_toEndOf="@id/frameForInterested"
+            app:layout_constraintStart_toStartOf="@id/frameForInterested"
+            app:layout_constraintTop_toTopOf="@id/frameForInterested"
+            app:maxImageSize="18dp"
+            app:rippleColor="@color/colorPrimaryVariant"
+            app:tint="@color/colorPrimaryVariant"
+            app:useCompatPadding="false" />
+
+        <View
+            android:id="@+id/fabIconForInterested"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="6dp"
+            android:background="@drawable/ic_baseline_favorite_border_24"
+            app:layout_constraintBottom_toBottomOf="@id/floatingActionButtonInterested"
+            app:layout_constraintEnd_toEndOf="@id/floatingActionButtonInterested"
+            app:layout_constraintStart_toStartOf="@id/floatingActionButtonInterested"
+            app:layout_constraintTop_toTopOf="@id/floatingActionButtonInterested" />
+
+        <FrameLayout
+            android:id="@+id/frameForIgnore"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toEndOf="@id/frameForInterested"
+            app:layout_constraintTop_toTopOf="@+id/guidelineH70" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButtonIgnore"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="6dp"
+            android:backgroundTint="@color/colorOnPrimary"
+            android:elevation="0dp"
+            android:gravity="center"
+            app:borderWidth="1dp"
+            app:elevation="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/frameForIgnore"
+            app:layout_constraintEnd_toEndOf="@id/frameForIgnore"
+            app:layout_constraintStart_toStartOf="@id/frameForIgnore"
+            app:layout_constraintTop_toTopOf="@id/frameForIgnore"
+            app:maxImageSize="18dp"
+            app:rippleColor="@color/colorPrimaryVariant"
+            app:tint="@color/colorPrimaryVariant"
+            app:useCompatPadding="false" />
+
+        <View
+            android:id="@+id/fabIconForIgnore"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="6dp"
+            android:background="@drawable/ic_baseline_person_add_disabled_24"
+            app:layout_constraintBottom_toBottomOf="@id/floatingActionButtonIgnore"
+            app:layout_constraintEnd_toEndOf="@id/floatingActionButtonIgnore"
+            app:layout_constraintStart_toStartOf="@id/floatingActionButtonIgnore"
+            app:layout_constraintTop_toTopOf="@id/floatingActionButtonIgnore" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
+

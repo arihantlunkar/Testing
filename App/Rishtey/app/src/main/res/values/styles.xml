@@ -18,5 +18,4 @@
         <!-- For android status bar background color -->
         <item name="colorPrimaryDark">@color/colorPrimary</item>
     </style>
-
 </resources>
