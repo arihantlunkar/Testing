@@ -1,0 +1,667 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.10" />
+
+    <FrameLayout
+        android:id="@+id/frame1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/frame2"
+        app:layout_constraintTop_toTopOf="@+id/guidelineTop" />
+
+    <FrameLayout
+        android:id="@+id/frame2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@+id/frame1"
+        app:layout_constraintRight_toLeftOf="@+id/frame3"
+        app:layout_constraintTop_toTopOf="@+id/guidelineTop" />
+
+    <FrameLayout
+        android:id="@+id/frame3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1:!"
+        app:layout_constraintLeft_toRightOf="@+id/frame2"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guidelineTop" />
+
+    <View
+        android:id="@+id/OuterCircle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/outer_circle"
+        app:layout_constraintBottom_toBottomOf="@+id/frame2"
+        app:layout_constraintEnd_toEndOf="@+id/frame2"
+        app:layout_constraintStart_toStartOf="@+id/frame2"
+        app:layout_constraintTop_toTopOf="@+id/frame2" />
+
+    <View
+        android:id="@+id/dotTopCircle"
+        android:layout_width="0.1dp"
+        android:layout_height="0.1dp"
+        app:layout_constraintBottom_toTopOf="@id/floatingActionButton"
+        app:layout_constraintRight_toRightOf="@id/frame2"
+        app:layout_constraintLeft_toLeftOf="@+id/frame2"
+        app:layout_constraintTop_toTopOf="@+id/frame2" />
+
+    <View
+        android:id="@+id/dotLeftCircle"
+        android:layout_width="0.1dp"
+        android:layout_height="0.1dp"
+        app:layout_constraintBottom_toBottomOf="@+id/frame2"
+        app:layout_constraintRight_toLeftOf="@id/floatingActionButton"
+        app:layout_constraintLeft_toLeftOf="@id/frame2"
+        app:layout_constraintTop_toTopOf="@+id/frame2" />
+
+    <View
+        android:id="@+id/middleCircle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/inner_circle"
+        app:layout_constraintBottom_toBottomOf="@+id/dotBottomCircle"
+        app:layout_constraintEnd_toEndOf="@+id/dotRightCircle"
+        app:layout_constraintStart_toStartOf="@+id/dotLeftCircle"
+        app:layout_constraintTop_toTopOf="@+id/dotTopCircle" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/background"
+        android:clickable="false"
+        android:focusable="false"
+        app:backgroundTint="@color/background"
+        app:borderWidth="0dp"
+        app:elevation="0dp"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="@+id/frame2"
+        app:layout_constraintEnd_toEndOf="@+id/frame2"
+        app:layout_constraintStart_toStartOf="@+id/frame2"
+        app:layout_constraintTop_toTopOf="@+id/frame2" />
+
+    <TextView
+        android:id="@+id/numericPercentage"
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:fontFamily="@font/metropolis_bold"
+        android:gravity="center"
+        android:text="0%"
+        android:textColor="@color/colorPrimaryVariant"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@id/OuterCircle"
+        app:layout_constraintLeft_toLeftOf="@id/OuterCircle"
+        app:layout_constraintRight_toRightOf="@id/OuterCircle"
+        app:layout_constraintTop_toTopOf="@id/OuterCircle" />
+
+    <View
+        android:id="@+id/dotRightCircle"
+        android:layout_width="0.1dp"
+        android:layout_height="0.1dp"
+        app:layout_constraintBottom_toBottomOf="@+id/frame2"
+        app:layout_constraintRight_toRightOf="@id/frame2"
+        app:layout_constraintLeft_toRightOf="@+id/floatingActionButton"
+        app:layout_constraintTop_toTopOf="@+id/frame2" />
+
+
+    <View
+        android:id="@+id/dotBottomCircle"
+        android:layout_width="0.1dp"
+        android:layout_height="0.1dp"
+        app:layout_constraintBottom_toBottomOf="@+id/frame2"
+        app:layout_constraintRight_toRightOf="@id/frame2"
+        app:layout_constraintLeft_toLeftOf="@+id/frame2"
+        app:layout_constraintTop_toBottomOf="@+id/floatingActionButton" />
+
+    <View
+        android:id="@+id/dotTopCircleForProgressBar"
+        android:layout_width="0.01dp"
+        android:layout_height="0.01dp"
+        app:layout_constraintBottom_toTopOf="@id/middleCircle"
+        app:layout_constraintLeft_toLeftOf="@+id/frame2"
+        app:layout_constraintRight_toRightOf="@id/frame2"
+        app:layout_constraintTop_toTopOf="@+id/frame2" />
+
+    <View
+        android:id="@+id/dotLeftCircleForProgressBar"
+        android:layout_width="0.01dp"
+        android:layout_height="0.01dp"
+        app:layout_constraintBottom_toBottomOf="@+id/frame2"
+        app:layout_constraintLeft_toLeftOf="@id/frame2"
+        app:layout_constraintRight_toLeftOf="@id/middleCircle"
+        app:layout_constraintTop_toTopOf="@+id/frame2" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@android:style/Widget.Material.Light.ProgressBar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:indeterminate="false"
+        android:indeterminateTint="@color/colorSecondaryVariant"
+        android:max="100"
+        android:progress="0"
+        app:layout_constraintBottom_toBottomOf="@id/dotBottomCircleForProgressBar"
+        app:layout_constraintLeft_toLeftOf="@id/dotLeftCircleForProgressBar"
+        app:layout_constraintRight_toRightOf="@id/dotRightCircleForProgressBar"
+        app:layout_constraintTop_toTopOf="@id/dotTopCircleForProgressBar" />
+
+    <View
+        android:id="@+id/dotRightCircleForProgressBar"
+        android:layout_width="0.01dp"
+        android:layout_height="0.01dp"
+        app:layout_constraintBottom_toBottomOf="@+id/frame2"
+        app:layout_constraintLeft_toRightOf="@+id/middleCircle"
+        app:layout_constraintRight_toRightOf="@id/frame2"
+        app:layout_constraintTop_toTopOf="@+id/frame2" />
+
+
+    <View
+        android:id="@+id/dotBottomCircleForProgressBar"
+        android:layout_width="0.01dp"
+        android:layout_height="0.01dp"
+        app:layout_constraintBottom_toBottomOf="@+id/frame2"
+        app:layout_constraintLeft_toLeftOf="@+id/frame2"
+        app:layout_constraintRight_toRightOf="@id/frame2"
+        app:layout_constraintTop_toBottomOf="@+id/middleCircle" />
+
+    <TextView
+        android:id="@+id/uploadHeading"
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/metropolis_bold"
+        android:gravity="center"
+        android:text="Verify Files Before Uploading"
+        android:textColor="@color/colorPrimary"
+        app:autoSizeMinTextSize="18sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/OuterCircle" />
+
+    <TextView
+        android:id="@+id/uploadSubHeading"
+        android:layout_width="match_parent"
+        android:layout_height="14dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/metropolis_regular"
+        android:gravity="center"
+        android:text="Below files will be uploaded"
+        android:textColor="@color/colorOnBackground"
+        app:autoSizeMinTextSize="8sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/uploadHeading" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.50" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.54" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.58" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.62" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.66" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.70" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.74" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.78" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.82" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.86" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.90" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline94"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.94" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline98"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.98" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".10" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineV30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".30" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineV70"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".70" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineV50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".50" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".90" />
+
+    <FrameLayout
+        android:id="@+id/frame4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/guideline2"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+        app:layout_constraintTop_toTopOf="@+id/guideline1" />
+
+    <View
+        android:id="@+id/biodataThumbnail"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/ic_baseline_list_alt_24"
+        app:layout_constraintBottom_toBottomOf="@id/guideline2"
+        app:layout_constraintEnd_toEndOf="@id/frame4"
+        app:layout_constraintStart_toStartOf="@id/frame4"
+        app:layout_constraintTop_toTopOf="@+id/guideline1" />
+
+    <TextView
+        android:id="@+id/biodataFileName"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/metropolis_regular"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:text="Biodata.pdf"
+        android:textColor="@color/colorOnBackground"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/guideline2"
+        app:layout_constraintEnd_toStartOf="@id/frame5"
+        app:layout_constraintStart_toEndOf="@id/frame4"
+        app:layout_constraintTop_toTopOf="@id/guideline1" />
+
+    <FrameLayout
+        android:id="@+id/frame5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="@id/guidelineRight"
+        app:layout_constraintTop_toTopOf="@+id/guideline1"
+        app:layout_constraintBottom_toBottomOf="@id/guideline2"
+        />
+
+    <View
+        android:id="@+id/biodataTick"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/ic_baseline_check_circle_outline_24"
+        app:layout_constraintBottom_toBottomOf="@id/guideline2"
+        app:layout_constraintEnd_toEndOf="@id/frame5"
+        app:layout_constraintStart_toStartOf="@id/frame5"
+        app:layout_constraintTop_toTopOf="@+id/guideline1" />
+
+    <View
+        android:id="@+id/bottomLine1"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="@drawable/line"
+        android:backgroundTint="@color/colorSurface"
+        app:layout_constraintBottom_toTopOf="@id/imgOneThumbnail"
+        app:layout_constraintEnd_toEndOf="@id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+        app:layout_constraintTop_toBottomOf="@id/biodataThumbnail" />
+
+    <View
+        android:id="@+id/imgOneThumbnail"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/ic_baseline_account_box_24"
+        app:layout_constraintBottom_toBottomOf="@id/guideline3"
+        app:layout_constraintEnd_toEndOf="@id/frame4"
+        app:layout_constraintStart_toStartOf="@id/frame4"
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
+    <TextView
+        android:id="@+id/imgOneFileName"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/metropolis_regular"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:text="Image1.jpeg"
+        android:textColor="@color/colorOnBackground"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/guideline3"
+        app:layout_constraintEnd_toStartOf="@id/frame5"
+        app:layout_constraintStart_toEndOf="@id/frame4"
+        app:layout_constraintTop_toTopOf="@id/guideline2" />
+
+    <View
+        android:id="@+id/imgOneTick"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/ic_baseline_check_circle_outline_24"
+        app:layout_constraintBottom_toBottomOf="@id/guideline3"
+        app:layout_constraintEnd_toEndOf="@id/frame5"
+        app:layout_constraintStart_toStartOf="@id/frame5"
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
+    <View
+        android:id="@+id/bottomLine2"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="@drawable/line"
+        android:backgroundTint="@color/colorSurface"
+        app:layout_constraintBottom_toTopOf="@id/imgTwoThumbnail"
+        app:layout_constraintEnd_toEndOf="@id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+        app:layout_constraintTop_toBottomOf="@id/imgOneThumbnail" />
+
+    <View
+        android:id="@+id/imgTwoThumbnail"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/ic_baseline_account_box_24"
+        app:layout_constraintBottom_toBottomOf="@id/guideline4"
+        app:layout_constraintEnd_toEndOf="@id/frame4"
+        app:layout_constraintStart_toStartOf="@id/frame4"
+        app:layout_constraintTop_toTopOf="@+id/guideline3" />
+
+    <TextView
+        android:id="@+id/imgTwoFileName"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/metropolis_regular"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:text="Image2.jpeg"
+        android:textColor="@color/colorOnBackground"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/guideline4"
+        app:layout_constraintEnd_toStartOf="@id/frame5"
+        app:layout_constraintStart_toEndOf="@id/frame4"
+        app:layout_constraintTop_toTopOf="@id/guideline3" />
+
+    <View
+        android:id="@+id/imgTwoTick"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/ic_baseline_check_circle_outline_24"
+        app:layout_constraintBottom_toBottomOf="@id/guideline4"
+        app:layout_constraintEnd_toEndOf="@id/frame5"
+        app:layout_constraintStart_toStartOf="@id/frame5"
+        app:layout_constraintTop_toTopOf="@+id/guideline3" />
+
+    <View
+        android:id="@+id/bottomLine3"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="@drawable/line"
+        android:backgroundTint="@color/colorSurface"
+        app:layout_constraintBottom_toTopOf="@id/imgThreeThumbnail"
+        app:layout_constraintEnd_toEndOf="@id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+        app:layout_constraintTop_toBottomOf="@id/imgTwoThumbnail" />
+
+    <View
+        android:id="@+id/imgThreeThumbnail"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/ic_baseline_account_box_24"
+        app:layout_constraintBottom_toBottomOf="@id/guideline5"
+        app:layout_constraintEnd_toEndOf="@id/frame4"
+        app:layout_constraintStart_toStartOf="@id/frame4"
+        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+
+    <TextView
+        android:id="@+id/imgThreeFileName"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/metropolis_regular"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:text="Image3.jpeg"
+        android:textColor="@color/colorOnBackground"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/guideline5"
+        app:layout_constraintEnd_toStartOf="@id/frame5"
+        app:layout_constraintStart_toEndOf="@id/frame4"
+        app:layout_constraintTop_toTopOf="@id/guideline4" />
+
+    <View
+        android:id="@+id/imgThreeTick"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/ic_baseline_check_circle_outline_24"
+        app:layout_constraintBottom_toBottomOf="@id/guideline5"
+        app:layout_constraintEnd_toEndOf="@id/frame5"
+        app:layout_constraintStart_toStartOf="@id/frame5"
+        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+
+    <View
+        android:id="@+id/bottomLine4"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="@drawable/line"
+        android:backgroundTint="@color/colorSurface"
+        app:layout_constraintBottom_toTopOf="@id/imgFourThumbnail"
+        app:layout_constraintEnd_toEndOf="@id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+        app:layout_constraintTop_toBottomOf="@id/imgThreeThumbnail" />
+
+    <View
+        android:id="@+id/imgFourThumbnail"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/ic_baseline_account_box_24"
+        app:layout_constraintBottom_toBottomOf="@id/guideline6"
+        app:layout_constraintEnd_toEndOf="@id/frame4"
+        app:layout_constraintStart_toStartOf="@id/frame4"
+        app:layout_constraintTop_toTopOf="@+id/guideline5" />
+
+    <TextView
+        android:id="@+id/imgFourFileName"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/metropolis_regular"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:text="Image4.jpeg"
+        android:textColor="@color/colorOnBackground"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/guideline6"
+        app:layout_constraintEnd_toStartOf="@id/frame5"
+        app:layout_constraintStart_toEndOf="@id/frame4"
+        app:layout_constraintTop_toTopOf="@id/guideline5" />
+
+    <View
+        android:id="@+id/imgFourTick"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/ic_baseline_check_circle_outline_24"
+        app:layout_constraintBottom_toBottomOf="@id/guideline6"
+        app:layout_constraintEnd_toEndOf="@id/frame5"
+        app:layout_constraintStart_toStartOf="@id/frame5"
+        app:layout_constraintTop_toTopOf="@+id/guideline5" />
+
+    <View
+        android:id="@+id/bottomLine5"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="@drawable/line"
+        android:backgroundTint="@color/colorSurface"
+        app:layout_constraintBottom_toTopOf="@id/imgFiveThumbnail"
+        app:layout_constraintEnd_toEndOf="@id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+        app:layout_constraintTop_toBottomOf="@id/imgFourThumbnail" />
+
+    <View
+        android:id="@+id/imgFiveThumbnail"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/ic_baseline_account_box_24"
+        app:layout_constraintBottom_toBottomOf="@id/guideline7"
+        app:layout_constraintEnd_toEndOf="@id/frame4"
+        app:layout_constraintStart_toStartOf="@id/frame4"
+        app:layout_constraintTop_toTopOf="@+id/guideline6" />
+
+    <TextView
+        android:id="@+id/imgFiveFileName"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/metropolis_regular"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:text="Image5.jpeg"
+        android:textColor="@color/colorOnBackground"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/guideline7"
+        app:layout_constraintEnd_toStartOf="@id/frame5"
+        app:layout_constraintStart_toEndOf="@id/frame4"
+        app:layout_constraintTop_toTopOf="@id/guideline6" />
+
+    <View
+        android:id="@+id/imgFiveTick"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/ic_baseline_check_circle_outline_24"
+        app:layout_constraintBottom_toBottomOf="@id/guideline7"
+        app:layout_constraintEnd_toEndOf="@id/frame5"
+        app:layout_constraintStart_toStartOf="@id/frame5"
+        app:layout_constraintTop_toTopOf="@+id/guideline6" />
+
+    <View
+        android:id="@+id/bottomLine6"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="@drawable/line"
+        android:backgroundTint="@color/colorSurface"
+        app:layout_constraintBottom_toTopOf="@id/guideline7"
+        app:layout_constraintEnd_toEndOf="@id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+        app:layout_constraintTop_toBottomOf="@id/imgFiveThumbnail" />
+
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/floatingActionButtonUpload"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:fontFamily="@font/metropolis_semibold"
+        android:gravity="center"
+        android:padding="0dp"
+        android:paddingStart="15dp"
+        android:paddingLeft="15dp"
+        android:paddingEnd="15dp"
+        android:paddingRight="15dp"
+        android:text="Upload Biodata"
+        android:textAllCaps="false"
+        app:autoSizeMinTextSize="8sp"
+        app:autoSizeTextType="uniform"
+        app:icon="@drawable/ic_baseline_cloud_upload_24"
+        app:iconPadding="6dp"
+        app:iconSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline94"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineV70"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV30"
+        app:layout_constraintTop_toTopOf="@id/guideline10"
+        app:rippleColor="@color/colorSecondaryVariant" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
