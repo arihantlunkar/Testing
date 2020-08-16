@@ -2,6 +2,7 @@ package com.rishtey;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -12,17 +13,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class UploadTaskServerCommunicator implements ITask {
 
     static class UploadData {
         Uri bioData;
-        Uri picture1;
-        Uri picture2;
-        Uri picture3;
-        Uri picture4;
-        Uri picture5;
         String fromID;
+        ArrayList<Uri> pictures;
     }
 
     private Context context;
@@ -57,26 +55,27 @@ public class UploadTaskServerCommunicator implements ITask {
 
     @Override
     public void trigger() throws IOException, NullPointerException, JSONException {
-        Volley.newRequestQueue(context).add(new JsonObjectRequest(Request.Method.POST, url, createJsonObject(uploadData), taskCompletedResponseListener, errorListener));
+
+        Log.d("Arihant", createJsonObject(uploadData).toString());
+        //Volley.newRequestQueue(context).add(new JsonObjectRequest(Request.Method.POST, url, createJsonObject(uploadData), taskCompletedResponseListener, errorListener));
     }
 
     private JSONObject createJsonObject(UploadData uploadData) throws JSONException, IOException {
+        JSONObject jsonObject = new JSONObject()
+                .put("fromID", uploadData.fromID)
+                //.put("stringImageBioData", Utilities.getStringImage(context, uploadData.bioData))
+                .put("extensionBioData", Utilities.getMimeType(context, uploadData.bioData));
+
+        Log.d("Arihant", uploadData.pictures.size() + " => size");
+
+        for (int i = 0; i < uploadData.pictures.size(); ++i) {
+            //jsonObject.put("stringImagePicture" + (i + 1), Utilities.getStringImage(context, uploadData.pictures.get(i)));
+            jsonObject.put("extensionPicture" + (i + 1), Utilities.getMimeType(context, uploadData.pictures.get(i)));
+        }
+
         return new JSONObject()
                 .put("input", new JSONObject()
                         .put("task", "upload")
-                        .put("data", new JSONObject()
-                                .put("fromID", uploadData.fromID)
-                                .put("stringImageBioData", Utilities.getStringImage(context, uploadData.bioData))
-                                .put("stringImagePicture1", Utilities.getStringImage(context, uploadData.picture1))
-                                .put("stringImagePicture2", Utilities.isNullOrEmpty(uploadData.picture2) ? null : Utilities.getStringImage(context, uploadData.picture2))
-                                .put("stringImagePicture3", Utilities.isNullOrEmpty(uploadData.picture3) ? null : Utilities.getStringImage(context, uploadData.picture3))
-                                .put("stringImagePicture4", Utilities.isNullOrEmpty(uploadData.picture4) ? null : Utilities.getStringImage(context, uploadData.picture4))
-                                .put("stringImagePicture5", Utilities.isNullOrEmpty(uploadData.picture5) ? null : Utilities.getStringImage(context, uploadData.picture5))
-                                .put("extensionBioData", Utilities.getMimeType(context, uploadData.bioData))
-                                .put("extensionPicture1", Utilities.getMimeType(context, uploadData.picture1))
-                                .put("extensionPicture2", Utilities.isNullOrEmpty(uploadData.picture2) ? null : Utilities.getMimeType(context, uploadData.picture2))
-                                .put("extensionPicture3", Utilities.isNullOrEmpty(uploadData.picture3) ? null : Utilities.getMimeType(context, uploadData.picture3))
-                                .put("extensionPicture4", Utilities.isNullOrEmpty(uploadData.picture4) ? null : Utilities.getMimeType(context, uploadData.picture4))
-                                .put("extensionPicture5", Utilities.isNullOrEmpty(uploadData.picture5) ? null : Utilities.getMimeType(context, uploadData.picture5))));
+                        .put("data", jsonObject));
     }
 }
