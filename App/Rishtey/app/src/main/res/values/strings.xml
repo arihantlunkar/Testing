@@ -2,7 +2,7 @@
     <string name="app_name">Rishtey</string>
     <string name="upload_heading">Upload Your Biodata</string>
     <string name="upload_subheading">Browse and choose the biodata you want to upload</string>
-    <string name="upload_subheading2">Max file size is 5MB</string>
+    <string name="upload_subheading2">Max file size allowed is 5 MB</string>
     <string name="step_1">STEP 1</string>
     <string name="step_2">STEP 2</string>
     <string name="search_content_desc">Search biodata on the basis of name</string>
@@ -14,7 +14,7 @@
     <string name="menu_home">Home</string>
     <string name="upload_photo_heading">Upload Bride or Groom Photos</string>
     <string name="upload_photo_subheading">Minimum 1 photo, Maximum 5 photos are allowed</string>
-    <string name="upload_photo_subheading2">Max photo size is 4MB</string>
+    <string name="upload_photo_subheading2">Max photo size allowed is 4 MB</string>
     <string name="cancel_upload">Cancel the importing process</string>
     <string name="_0">0%</string>
     <string name="verify_files_before_uploading">Verify Files Before Uploading</string>
@@ -28,4 +28,10 @@
     <string name="image5_jpeg">Image5.jpeg</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Messages to be shown to user -->
+    <string name="onGalleryDeniedAccessMsg">Permissions not granted to access gallery.</string>
+    <string name="onSelectBiodataGalleryTitleMsg">Select Biodata</string>
+    <string name="onSelectPicturesGalleryTitleMsg">Select Pictures</string>
+    <string name="emptyString" />
 </resources>

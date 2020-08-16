@@ -10,6 +10,8 @@ import android.provider.OpenableColumns;
 import android.util.Base64;
 import android.webkit.MimeTypeMap;
 
+import androidx.annotation.NonNull;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -18,7 +20,7 @@ import java.util.Objects;
 
 public class Utilities {
 
-    public static String getStringImage(Context context, Uri uri) throws IOException {
+    public static String getStringImage(@NonNull Context context, @NonNull Uri uri) throws IOException {
         byte[] imageBytes;
         if (getMimeType(context, uri).equalsIgnoreCase("pdf")) {
             imageBytes = getBytes(Objects.requireNonNull(context.getContentResolver().openInputStream(uri)));
@@ -31,7 +33,7 @@ public class Utilities {
         return Base64.encodeToString(imageBytes, Base64.DEFAULT);
     }
 
-    public static String getMimeType(Context context, Uri uri) {
+    public static String getMimeType(@NonNull Context context, @NonNull Uri uri) {
         String extension;
         if (Objects.equals(uri.getScheme(), ContentResolver.SCHEME_CONTENT)) {
             final MimeTypeMap mime = MimeTypeMap.getSingleton();
@@ -50,16 +52,11 @@ public class Utilities {
         return uri == null || isNullOrEmpty(uri.toString());
     }
 
-    public static String getRelativeName(Context context, Uri uri) throws Exception {
-        Cursor cursor = context.getContentResolver().query(uri, null, null, null, null, null);
-        if (null == cursor) {
-            throw new NullPointerException();
-        }
-        final boolean isValidName = cursor.moveToFirst();
-        if (!isValidName) {
-            throw new Exception("File name is corrupt!");
-        }
-        final String name = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+    public static String getRelativeName(@NonNull Context context, @NonNull Uri uri) {
+        Cursor cursor = Objects.requireNonNull(context.getContentResolver().query(uri, null, null, null, null, null));
+        final int nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+        cursor.moveToFirst();
+        final String name = cursor.getString(nameIndex);
         cursor.close();
         return name;
     }
@@ -77,5 +74,14 @@ public class Utilities {
             byteBuffer.write(buffer, 0, len);
         }
         return byteBuffer.toByteArray();
+    }
+
+    public static boolean isFileSizeValid(@NonNull Context context, @NonNull Uri uri, int expectedSize /*in MB*/) {
+        Cursor cursor = Objects.requireNonNull(context.getContentResolver().query(uri, null, null, null, null, null));
+        final int sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE);
+        cursor.moveToFirst();
+        final long size = cursor.getLong(sizeIndex);
+        cursor.close();
+        return size <= expectedSize * 1024 * 1024;
     }
 }
