@@ -17,14 +17,12 @@ class CustomMessage extends Exception
 	{
 		return json_encode(
 			array(
-				'output' => array(
-					'module' => $this->mModule,
-					'status' => $this->mStatus,
-					'message' => $this->message,
-					'code' => $this->code,
-					'description' => $this->mDescription,
-					'data' => $this->mOutputDataArr
-				)
+				'module' => $this->mModule,
+				'status' => $this->mStatus,
+				'message' => $this->message,
+				'code' => $this->code,
+				'description' => $this->mDescription,
+				'data' => $this->mOutputDataArr
 			),
 			JSON_PRETTY_PRINT
 		);
