@@ -151,7 +151,7 @@
         android:layout_height="0dp"
         android:indeterminate="false"
         style="?android:progressBarStyleHorizontal"
-        android:progress="30"
+        android:progress="0"
         android:progressDrawable="@drawable/upload_custom_progress_bar"
         app:layout_constraintBottom_toBottomOf="@id/dotBottomCircleForProgressBar"
         app:layout_constraintStart_toStartOf="@id/dotLeftCircleForProgressBar"

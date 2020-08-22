@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         UploadTaskServerCommunicator.UploadData uploadData = new UploadTaskServerCommunicator.UploadData();
-        uploadData.fromID = "26072020160926000000";
+        uploadData.fromID = Utilities.getUploadID();
 
         SelectBiodataFragment fragment = new SelectBiodataFragment();
         fragment.setArguments(uploadData);

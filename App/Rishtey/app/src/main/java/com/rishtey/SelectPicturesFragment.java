@@ -16,7 +16,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -84,7 +83,7 @@ public class SelectPicturesFragment extends Fragment implements View.OnClickList
         UploadFragment fragment = new UploadFragment();
         fragment.setArguments(uploadData);
 
-        FragmentTransaction fragmentTransaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
+        FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
         fragmentTransaction.replace(R.id.fragmentPlace, fragment);
         fragmentTransaction.addToBackStack(null);
@@ -97,19 +96,19 @@ public class SelectPicturesFragment extends Fragment implements View.OnClickList
         uploadData.pictures = new ArrayList<>();
 
         if (null != data.getData()) {
-            if (Utilities.isFileSizeValid(Objects.requireNonNull(this.getContext()), data.getData(), MAXIMUM_FILE_SIZE_ALLOWED)) {
+            if (Utilities.isFileSizeValid(this.requireContext(), data.getData(), MAXIMUM_FILE_SIZE_ALLOWED)) {
                 uploadData.pictures.add(data.getData());
             } else {
-                Toast.makeText(getActivity(), "Size of " + Utilities.getRelativeName(this.getContext(), data.getData()) + " is more than " + MAXIMUM_FILE_SIZE_ALLOWED + " MB.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Size of " + Utilities.getRelativeName(this.requireContext(), data.getData()) + " is more than " + MAXIMUM_FILE_SIZE_ALLOWED + " MB.", Toast.LENGTH_LONG).show();
                 areAllPicturesSizesValid = false;
             }
         } else if (null != clipData) {
             for (int i = 0; i < clipData.getItemCount() && i < MAX_NO_PICTURES_ALLOWED; i++) {
                 Uri uri = clipData.getItemAt(i).getUri();
-                if (Utilities.isFileSizeValid(Objects.requireNonNull(this.getContext()), uri, MAXIMUM_FILE_SIZE_ALLOWED)) {
+                if (Utilities.isFileSizeValid(this.requireContext(), uri, MAXIMUM_FILE_SIZE_ALLOWED)) {
                     uploadData.pictures.add(clipData.getItemAt(i).getUri());
                 } else {
-                    Toast.makeText(getActivity(), "Size of " + Utilities.getRelativeName(this.getContext(), uri) + " is more than " + MAXIMUM_FILE_SIZE_ALLOWED + " MB.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Size of " + Utilities.getRelativeName(this.requireContext(), uri) + " is more than " + MAXIMUM_FILE_SIZE_ALLOWED + " MB.", Toast.LENGTH_LONG).show();
                     areAllPicturesSizesValid = false;
                     break;
                 }

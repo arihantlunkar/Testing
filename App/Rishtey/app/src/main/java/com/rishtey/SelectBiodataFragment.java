@@ -13,8 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import java.util.Objects;
-
 import static android.app.Activity.RESULT_OK;
 
 public class SelectBiodataFragment extends Fragment implements View.OnClickListener {
@@ -83,7 +81,7 @@ public class SelectBiodataFragment extends Fragment implements View.OnClickListe
         SelectPicturesFragment fragment = new SelectPicturesFragment();
         fragment.setArguments(uploadData);
 
-        FragmentTransaction fragmentTransaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
+        FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
         fragmentTransaction.replace(R.id.fragmentPlace, fragment);
         fragmentTransaction.addToBackStack(null);

@@ -39,7 +39,7 @@ import org.json.JSONObject;
 
 public class LoginTaskServerCommunicator implements ITask {
 
-    static class LoginData {
+     static class LoginData {
         public String socialMedia;
         public String socialMediaID;
         public String name;

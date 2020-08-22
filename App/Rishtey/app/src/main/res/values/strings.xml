@@ -43,4 +43,10 @@
 
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="We_Are_Uploading_Your_Files">We Are Uploading Your Files</string>
+    <string name="Please_wait">Please wait … </string>
+    <string name="Files_Uploaded_Successfully">Files Uploaded Successfully!</string>
+    <string name="Biodata_under_review_and_will_take_couple_of_days_to_get_reflected">Biodata under review and will take couple of days to get reflected.</string>
+    <string name="No_internet_connection">No internet connection!</string>
+    <string name="_100">100 %</string>
 </resources>

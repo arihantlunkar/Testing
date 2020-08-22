@@ -1,21 +1,31 @@
 package com.rishtey;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class UploadTaskServerCommunicator implements ITask {
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import okio.BufferedSink;
+import okio.Okio;
+import okio.Source;
+
+public class UploadTaskServerCommunicator implements ITask, Runnable {
 
     static class UploadData {
         Uri bioData;
@@ -23,59 +33,95 @@ public class UploadTaskServerCommunicator implements ITask {
         ArrayList<Uri> pictures;
     }
 
+    static class ContentUriRequestBody extends RequestBody {
+
+        ContentResolver contentResolver;
+        Uri uri;
+        int totalFilesToUpload;
+        int currentFileNoUploading;
+        ResponseListener responseListener;
+
+        ContentUriRequestBody(ContentResolver contentResolver, Uri uri, int totalFilesToUpload, int currentFileNoUploading, ResponseListener responseListener) {
+            this.contentResolver = contentResolver;
+            this.uri = uri;
+            this.totalFilesToUpload = totalFilesToUpload;
+            this.currentFileNoUploading = currentFileNoUploading;
+            this.responseListener = responseListener;
+        }
+
+        @Nullable
+        @Override
+        public MediaType contentType() {
+            return MediaType.parse(Objects.requireNonNull(contentResolver.getType(uri)));
+        }
+
+        @Override
+        public void writeTo(@NotNull BufferedSink bufferedSink) throws IOException {
+            InputStream inputStream = Objects.requireNonNull(contentResolver.openInputStream(uri));
+            try (Source source = Okio.source(inputStream)) {
+                bufferedSink.writeAll(source);
+            }
+            responseListener.onFileUpload(currentFileNoUploading);
+        }
+    }
+
     private Context context;
-    private String url;
     private UploadData uploadData;
-    private Response.Listener<JSONObject> taskCompletedResponseListener;
-    private Response.ErrorListener errorListener;
-    private IntermediateResponseListener intermediateResponseListener;
-    private Boolean isUploadCancelled;
+    private ResponseListener responseListener;
+    private Thread thread;
 
-    public interface IntermediateResponseListener {
-        void onPercentageChange(int percentage);
+    public interface ResponseListener {
+        void onFileUpload(int fileNumber);
 
-        void onBioDataUpload();
+        void onSuccess(JSONObject jsonObject);
 
-        void onPictureUpload(int pictureNumber);
+        void onFailure(String errMsg);
     }
 
-    public UploadTaskServerCommunicator(Context context, String url, UploadData uploadData, Response.Listener<JSONObject> taskCompletedResponseListener, Response.ErrorListener errorListener, IntermediateResponseListener intermediateResponseListener) {
+    public UploadTaskServerCommunicator(@NotNull Context context, @NotNull UploadData uploadData, @NotNull ResponseListener responseListener) {
         this.context = context;
-        this.url = url;
         this.uploadData = uploadData;
-        this.taskCompletedResponseListener = taskCompletedResponseListener;
-        this.errorListener = errorListener;
-        this.intermediateResponseListener = intermediateResponseListener;
-        this.isUploadCancelled = false;
-    }
-
-    public void setIsUploadCancelled() {
-        isUploadCancelled = true;
+        this.responseListener = responseListener;
+        this.thread = new Thread(this);
     }
 
     @Override
-    public void trigger() throws IOException, NullPointerException, JSONException {
+    public void run() {
+        OkHttpClient client = new OkHttpClient();
 
-        Log.d("Arihant", createJsonObject(uploadData).toString());
-        //Volley.newRequestQueue(context).add(new JsonObjectRequest(Request.Method.POST, url, createJsonObject(uploadData), taskCompletedResponseListener, errorListener));
+        MultipartBody.Builder multipartBody = createMultipartBody();
+
+        Request request = createRequest(multipartBody);
+
+        try {
+            Response response = client.newCall(request).execute();
+            responseListener.onSuccess(new JSONObject(Objects.requireNonNull(response.body()).string()));
+        } catch (IOException | JSONException e) {
+            responseListener.onFailure(e.getMessage());
+        }
     }
 
-    private JSONObject createJsonObject(UploadData uploadData) throws JSONException, IOException {
-        JSONObject jsonObject = new JSONObject()
-                .put("fromID", uploadData.fromID)
-                //.put("stringImageBioData", Utilities.getStringImage(context, uploadData.bioData))
-                .put("extensionBioData", Utilities.getMimeType(context, uploadData.bioData));
+    private Request createRequest(@NotNull MultipartBody.Builder multipartBody) {
+        return new Request.Builder()
+                .url(Utilities.getRootURL())
+                .post(multipartBody.build())
+                .build();
+    }
 
-        Log.d("Arihant", uploadData.pictures.size() + " => size");
+    private MultipartBody.Builder createMultipartBody() {
+        MultipartBody.Builder multipartBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
+        multipartBody.addFormDataPart("task", "upload");
+        multipartBody.addFormDataPart("fromID", uploadData.fromID);
+        multipartBody.addFormDataPart("biodata", "biodata", new ContentUriRequestBody(context.getContentResolver(), uploadData.bioData, 1 + uploadData.pictures.size(), 1, responseListener));
 
         for (int i = 0; i < uploadData.pictures.size(); ++i) {
-            //jsonObject.put("stringImagePicture" + (i + 1), Utilities.getStringImage(context, uploadData.pictures.get(i)));
-            jsonObject.put("extensionPicture" + (i + 1), Utilities.getMimeType(context, uploadData.pictures.get(i)));
+            multipartBody.addFormDataPart("picture" + (i + 1), "picture" + (i + 1), new ContentUriRequestBody(context.getContentResolver(), uploadData.pictures.get(i), 1 + uploadData.pictures.size(), i + 2, responseListener));
         }
+        return multipartBody;
+    }
 
-        return new JSONObject()
-                .put("input", new JSONObject()
-                        .put("task", "upload")
-                        .put("data", jsonObject));
+    @Override
+    public void trigger() {
+        this.thread.start();
     }
 }
