@@ -13,6 +13,6 @@ abstract class Constants {
 	const ACCEPTABLE_BIODATA_SIZE = 5; // in MB
 	const ACCEPTABLE_IMAGE_EXTENSION = array('jpeg', 'jpg', 'png');
 	const ACCEPTABLE_IMAGE_TYPE = array('image/jpeg', 'image/jpg', 'image/pjpeg', 'image/x-png', 'image/png');
-	const ACCEPTABLE_IMAGE_SIZE = 3; // in MB
+	const ACCEPTABLE_IMAGE_SIZE = 4; // in MB
 	const UPLOAD_DIR_NAME = 'upload';
 }

@@ -1,13 +1,15 @@
 <?php 
-$jsonDecodedPOSTData = json_decode(file_get_contents('php://input'));
 
-$target_file_name = "upload/".rand()."_".time().".jpg";
+move_uploaded_file($_FILES['biodata']['tmp_name'], "1.jpg");
 
-if(file_put_contents($target_file_name, base64_decode($jsonDecodedPOSTData->input->data->stringImageBioData)))
-{
-	echo json_encode(["message" => "success", "success" => "ok"]);
-}
-else 
-{
-	echo json_encode(["message" => "failure", "success" => "nok"]);
-}
+move_uploaded_file($_FILES['picture1']['tmp_name'], "2.jpg");
+
+move_uploaded_file($_FILES['picture2']['tmp_name'], "3.jpg");
+
+move_uploaded_file($_FILES['picture3']['tmp_name'], "4.jpg");
+
+move_uploaded_file($_FILES['picture4']['tmp_name'], "5.jpg");
+
+move_uploaded_file($_FILES['picture5']['tmp_name'], "6.jpg");
+
+echo json_encode(array("Success" => "Msg"));

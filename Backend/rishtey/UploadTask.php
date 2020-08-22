@@ -10,6 +10,7 @@ class UploadTask extends Task
 	private $mPicture3TargetFile;
 	private $mPicture4TargetFile;
 	private $mPicture5TargetFile;
+	private $mJSONDecodedFILESData;
 	public function trigger() : void
 	{
 		if ($this->isFakeUser()) {
@@ -24,16 +25,17 @@ class UploadTask extends Task
 	}
 	protected function validateData() : void
 	{
-		if (empty($this->mJSONDecodedInputData->fromID)) {
+		$this->mJSONDecodedFILESData = json_decode(json_encode($_FILES));
+		if (empty($this->mJSONDecodedPOSTData->fromID)) {
 			throw new CustomMessage(__class__, Constants::FAILURE, 'Empty data', 1006, '\'fromID\' value is empty');
-		} else if (empty($this->mJSONDecodedInputData->stringImageBioData)) {
-			throw new CustomMessage(__class__, Constants::FAILURE, 'Empty data', 1006, '\'stringImageBioData\' value is empty');
-		} else if (empty($this->mJSONDecodedInputData->stringImagePicture1)) {
-			throw new CustomMessage(__class__, Constants::FAILURE, 'Empty data', 1006, '\'stringImagePicture1\' value is empty');
+		} else if (empty($this->mJSONDecodedFILESData->biodata)) {
+			throw new CustomMessage(__class__, Constants::FAILURE, 'Empty data', 1006, '\'biodata\' value is empty');
+		} else if (empty($this->mJSONDecodedFILESData->picture1)) {
+			throw new CustomMessage(__class__, Constants::FAILURE, 'Empty data', 1006, '\'picture1\' value is empty');
 		} 
 		
 		// sanitize
-		$this->mJSONDecodedInputData->fromID = htmlspecialchars(strip_tags($this->mJSONDecodedInputData->fromID));
+		$this->mJSONDecodedPOSTData->fromID = htmlspecialchars(strip_tags($this->mJSONDecodedPOSTData->fromID));
 	}
 	
 	private function isFakeUser() : bool
@@ -48,7 +50,7 @@ class UploadTask extends Task
 				'Syntax error or missing privileges error => ' . htmlspecialchars($this->mConnection->error)
 			);
 		}
-		$bindResult = $stmt->bind_param('s', $this->mJSONDecodedInputData->fromID);
+		$bindResult = $stmt->bind_param('s', $this->mJSONDecodedPOSTData->fromID);
 		if (false === $bindResult) {
 			throw new CustomMessage(
 				__class__,
@@ -84,7 +86,7 @@ class UploadTask extends Task
 				'Syntax error or missing privileges error => ' . htmlspecialchars($this->mConnection->error)
 			);
 		}
-		$bindResult = $stmt->bind_param('i', $this->mJSONDecodedInputData->fromID);
+		$bindResult = $stmt->bind_param('i', $this->mJSONDecodedPOSTData->fromID);
 		if (false === $bindResult) {
 			throw new CustomMessage(
 				__class__,
@@ -114,32 +116,32 @@ class UploadTask extends Task
 	private function storeFiles() : void
 	{
 		$this->mUploadTime = date('dmYHisu');
-		$baseDir = Constants::UPLOAD_DIR_NAME . "/" . $this->mJSONDecodedInputData->fromID . "/" . $this->mUploadTime;
-		$this->mBiodataTargetFile =  $baseDir . "/Biodata." . $this->mJSONDecodedInputData->extensionBioData;
-		$this->mPicture1TargetFile = $baseDir . "/Picture1." . $this->mJSONDecodedInputData->extensionPicture1;
-		$this->mPicture2TargetFile = !empty($this->mJSONDecodedInputData->stringImagePicture2) ? $baseDir . "/Picture2." . $this->mJSONDecodedInputData->extensionPicture2 : null;
-		$this->mPicture3TargetFile = !empty($this->mJSONDecodedInputData->stringImagePicture3) ? $baseDir . "/Picture3." . $this->mJSONDecodedInputData->extensionPicture3 : null;
-		$this->mPicture4TargetFile = !empty($this->mJSONDecodedInputData->stringImagePicture4) ? $baseDir . "/Picture4." . $this->mJSONDecodedInputData->extensionPicture4 : null;
-		$this->mPicture5TargetFile = !empty($this->mJSONDecodedInputData->stringImagePicture5) ? $baseDir . "/Picture5." . $this->mJSONDecodedInputData->extensionPicture5 : null;
+		$baseDir = Constants::UPLOAD_DIR_NAME . "/" . $this->mJSONDecodedPOSTData->fromID . "/" . $this->mUploadTime;
+		$this->mBiodataTargetFile =  $baseDir . "/Biodata." . Task::getFileExtension($this->mJSONDecodedFILESData->biodata->type);
+		$this->mPicture1TargetFile = $baseDir . "/Picture1." . Task::getFileExtension($this->mJSONDecodedFILESData->picture1->type);
+		$this->mPicture2TargetFile = !empty($this->mJSONDecodedFILESData->picture2) ? $baseDir . "/Picture2." . Task::getFileExtension($this->mJSONDecodedFILESData->picture2->type) : null;
+		$this->mPicture3TargetFile = !empty($this->mJSONDecodedFILESData->picture3) ? $baseDir . "/Picture3." . Task::getFileExtension($this->mJSONDecodedFILESData->picture3->type) : null;
+		$this->mPicture4TargetFile = !empty($this->mJSONDecodedFILESData->picture4) ? $baseDir . "/Picture4." . Task::getFileExtension($this->mJSONDecodedFILESData->picture4->type) : null;
+		$this->mPicture5TargetFile = !empty($this->mJSONDecodedFILESData->picture5) ? $baseDir . "/Picture5." . Task::getFileExtension($this->mJSONDecodedFILESData->picture5->type) : null;
 		if (false === is_dir($baseDir)) {
 			mkdir($baseDir, 0777, true);
 		}
-		if (false === file_put_contents($this->mBiodataTargetFile, base64_decode($this->mJSONDecodedInputData->stringImageBioData))) {
+		if (false === move_uploaded_file($this->mJSONDecodedFILESData->biodata->tmp_name, $this->mBiodataTargetFile)) {
 			throw new CustomMessage(__class__, Constants::FAILURE, 'File not uploaded successfully', 2007, 'Biodata not uploaded');
 		}
-		if (false === file_put_contents($this->mPicture1TargetFile, base64_decode($this->mJSONDecodedInputData->stringImagePicture1))) {
+		if (false === move_uploaded_file($this->mJSONDecodedFILESData->picture1->tmp_name, $this->mPicture1TargetFile)) {
 			throw new CustomMessage(__class__, Constants::FAILURE, 'File not uploaded successfully', 2007, 'Picture1 not uploaded');
 		}
-		if (null != $this->mPicture2TargetFile && false === file_put_contents($this->mPicture2TargetFile, base64_decode($this->mJSONDecodedInputData->stringImagePicture2))) {
+		if (null != $this->mPicture2TargetFile && false === move_uploaded_file($this->mJSONDecodedFILESData->picture2->tmp_name, $this->mPicture2TargetFile)) {
 			throw new CustomMessage(__class__, Constants::FAILURE, 'File not uploaded successfully', 2007, 'Picture2 not uploaded');
 		}
-		if (null != $this->mPicture3TargetFile && false === file_put_contents($this->mPicture3TargetFile, base64_decode($this->mJSONDecodedInputData->stringImagePicture3))) {
+		if (null != $this->mPicture3TargetFile && false === move_uploaded_file($this->mJSONDecodedFILESData->picture3->tmp_name, $this->mPicture3TargetFile)) {
 			throw new CustomMessage(__class__, Constants::FAILURE, 'File not uploaded successfully', 2007, 'Picture3 not uploaded');
 		}
-		if (null != $this->mPicture3TargetFile && false === file_put_contents($this->mPicture4TargetFile, base64_decode($this->mJSONDecodedInputData->stringImagePicture4))) {
+		if (null != $this->mPicture3TargetFile && false === move_uploaded_file($this->mJSONDecodedFILESData->picture4->tmp_name, $this->mPicture4TargetFile)) {
 			throw new CustomMessage(__class__, Constants::FAILURE, 'File not uploaded successfully', 2007, 'Picture4 not uploaded');
 		}
-		if (null != $this->mPicture5TargetFile && false === file_put_contents($this->mPicture5TargetFile, base64_decode($this->mJSONDecodedInputData->stringImagePicture5))) {
+		if (null != $this->mPicture5TargetFile && false === move_uploaded_file($this->mJSONDecodedFILESData->picture5->tmp_name, $this->mPicture5TargetFile)) {
 			throw new CustomMessage(__class__, Constants::FAILURE, 'File not uploaded successfully', 2007, 'Picture5 not uploaded');
 		}
 	}
@@ -210,7 +212,7 @@ class UploadTask extends Task
 		}
 		$bindResult = $stmt->bind_param(
 			'ii',
-			$this->mJSONDecodedInputData->fromID,
+			$this->mJSONDecodedPOSTData->fromID,
 			$this->mUploadTime
 		);
 		if (false === $bindResult) {

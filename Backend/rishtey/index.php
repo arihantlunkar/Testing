@@ -12,9 +12,9 @@ try {
 	if ('POST' !== $_SERVER['REQUEST_METHOD']) {
 		throw new CustomMessage(__class__, Constants::FAILURE, 'Only POST request allowed', 1001);
 	}
-	$jsonDecodedPOSTData = json_decode(file_get_contents('php://input')); // For raw
+	$jsonDecodedPOSTData = json_decode(json_encode($_POST));
 	TaskFactory::get($jsonDecodedPOSTData)->trigger();
 } catch (CustomMessage $e) {
-	header('Content-Type: application/json');
+	header('Content-Type: applicatiosn/json');
 	echo $e->get();
 }

@@ -12,7 +12,7 @@ class TaskFactory
 	final public static function get($jsonDecodedPOSTData) : Task
 	{
 		$task = null;
-		if (!isset($jsonDecodedPOSTData->input->task)) {
+		if (!isset($jsonDecodedPOSTData->task)) {
 			throw new CustomMessage(
 				__class__,
 				Constants::FAILURE,
@@ -20,42 +20,34 @@ class TaskFactory
 				1003,
 				'Missing \'task\' tag in input JSON object or Task is empty'
 			);
-		} else if (!isset($jsonDecodedPOSTData->input->data)) {
-			throw new CustomMessage(
-				__class__,
-				Constants::FAILURE,
-				'Missing tag in JSON object',
-				1003,
-				'Missing \'data\' tag in input JSON object or Task is empty'
-			);
-		}
-		switch (strtolower($jsonDecodedPOSTData->input->task)) {
+		} 
+		switch (strtolower($jsonDecodedPOSTData->task)) {
 			case 'login':
-				$task = new LoginTask($jsonDecodedPOSTData->input->data);
+				$task = new LoginTask($jsonDecodedPOSTData);
 				break;
 
 			case 'upload':
-				$task = new UploadTask($jsonDecodedPOSTData->input->data);
+				$task = new UploadTask($jsonDecodedPOSTData);
 				break;
 
 			case 'delete':
-				$task = new DeleteTask($jsonDecodedPOSTData->input->data);
+				$task = new DeleteTask($jsonDecodedPOSTData);
 				break;
 
 			case 'download':
-				$task = new DownloadTask($jsonDecodedPOSTData->input->data);
+				$task = new DownloadTask($jsonDecodedPOSTData);
 				break;
 
 			case 'filter':
-				$task = new FilterTask($jsonDecodedPOSTData->input->data);
+				$task = new FilterTask($jsonDecodedPOSTData);
 				break;
 
 			case 'search':
-				$task = new SearchTask($jsonDecodedPOSTData->input->data);
+				$task = new SearchTask($jsonDecodedPOSTData);
 				break;
 
 			case 'display':
-				$task = new DisplayTask($jsonDecodedPOSTData->input->data);
+				$task = new DisplayTask($jsonDecodedPOSTData);
 				break;
 
 			default:
@@ -64,7 +56,7 @@ class TaskFactory
 					Constants::FAILURE,
 					'Unknown task',
 					1004,
-					'No task named \'' . $jsonDecodedPOSTData->input->task . '\' found'
+					'No task named \'' . $jsonDecodedPOSTData->task . '\' found'
 				);
 		}
 		return $task;
