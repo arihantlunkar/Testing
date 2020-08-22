@@ -1,29 +1,15 @@
-package com.rishtey;
+package com.rishtey.util;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.OpenableColumns;
-import android.webkit.MimeTypeMap;
 
 import androidx.annotation.NonNull;
 
-import java.io.File;
 import java.util.Objects;
 
 public class Utilities {
-
-    public static String getMimeType(@NonNull Context context, @NonNull Uri uri) {
-        String extension;
-        if (Objects.equals(uri.getScheme(), ContentResolver.SCHEME_CONTENT)) {
-            final MimeTypeMap mime = MimeTypeMap.getSingleton();
-            extension = mime.getExtensionFromMimeType(context.getContentResolver().getType(uri));
-        } else {
-            extension = MimeTypeMap.getFileExtensionFromUrl(Uri.fromFile(new File(Objects.requireNonNull(uri.getPath()))).toString());
-        }
-        return extension;
-    }
 
     public static String getRelativeName(@NonNull Context context, @NonNull Uri uri) {
         Cursor cursor = Objects.requireNonNull(context.getContentResolver().query(uri, null, null, null, null, null));

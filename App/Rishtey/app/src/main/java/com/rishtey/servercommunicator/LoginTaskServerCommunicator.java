@@ -1,4 +1,4 @@
-package com.rishtey;
+package com.rishtey.servercommunicator;
 
 import android.content.Context;
 
@@ -6,6 +6,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.rishtey.listeners.TaskListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,9 +38,9 @@ import org.json.JSONObject;
 *
 * */
 
-public class LoginTaskServerCommunicator implements ITask {
+public class LoginTaskServerCommunicator implements TaskListener {
 
-     static class LoginData {
+    static class LoginData {
         public String socialMedia;
         public String socialMediaID;
         public String name;
@@ -66,6 +67,16 @@ public class LoginTaskServerCommunicator implements ITask {
     @Override
     public void trigger() throws JSONException {
         Volley.newRequestQueue(context).add(new JsonObjectRequest(Request.Method.POST, url, createJsonObject(loginData), taskCompletedResponseListener, errorListener));
+    }
+
+    @Override
+    public void onCancel() {
+
+    }
+
+    @Override
+    public boolean isTaskAlive() {
+        return false;
     }
 
     private JSONObject createJsonObject(LoginData loginData) throws JSONException {

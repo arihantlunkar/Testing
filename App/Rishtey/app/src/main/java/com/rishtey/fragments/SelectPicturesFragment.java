@@ -1,4 +1,4 @@
-package com.rishtey;
+package com.rishtey.fragments;
 
 import android.Manifest;
 import android.content.ClipData;
@@ -15,6 +15,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.rishtey.R;
+import com.rishtey.data.UploadData;
+import com.rishtey.util.Utilities;
+
 import java.util.ArrayList;
 
 import static android.app.Activity.RESULT_OK;
@@ -22,10 +26,9 @@ import static android.app.Activity.RESULT_OK;
 public class SelectPicturesFragment extends Fragment implements View.OnClickListener {
 
     public static final int MAXIMUM_FILE_SIZE_ALLOWED = 4; // in MB
-    private static final int GALLERY_REQUEST_PERMISSIONS_CODE = 1;
     public static final String[] PICTURES_ALLOWED_MIME_TYPES = {"image/*"};
     public static final int MAX_NO_PICTURES_ALLOWED = 5;
-    private UploadTaskServerCommunicator.UploadData uploadData = null;
+    private static final int GALLERY_REQUEST_PERMISSIONS_CODE = 1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,10 +69,6 @@ public class SelectPicturesFragment extends Fragment implements View.OnClickList
         }
     }
 
-    public void setArguments(@NonNull UploadTaskServerCommunicator.UploadData uploadData) {
-        this.uploadData = uploadData;
-    }
-
     private void openGallery() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("*/*")
@@ -80,12 +79,9 @@ public class SelectPicturesFragment extends Fragment implements View.OnClickList
     }
 
     private void gotoNextFragment() {
-        UploadFragment fragment = new UploadFragment();
-        fragment.setArguments(uploadData);
-
         FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
-        fragmentTransaction.replace(R.id.fragmentPlace, fragment);
+        fragmentTransaction.replace(R.id.fragmentPlace, new UploadFragment());
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
@@ -93,11 +89,11 @@ public class SelectPicturesFragment extends Fragment implements View.OnClickList
     private boolean areAllPicturesSizesValid(@NonNull Intent data) {
         boolean areAllPicturesSizesValid = true;
         ClipData clipData = data.getClipData();
-        uploadData.pictures = new ArrayList<>();
+        UploadData.getInstance().mPictures = new ArrayList<>();
 
         if (null != data.getData()) {
             if (Utilities.isFileSizeValid(this.requireContext(), data.getData(), MAXIMUM_FILE_SIZE_ALLOWED)) {
-                uploadData.pictures.add(data.getData());
+                UploadData.getInstance().mPictures.add(data.getData());
             } else {
                 Toast.makeText(getActivity(), "Size of " + Utilities.getRelativeName(this.requireContext(), data.getData()) + " is more than " + MAXIMUM_FILE_SIZE_ALLOWED + " MB.", Toast.LENGTH_LONG).show();
                 areAllPicturesSizesValid = false;
@@ -106,7 +102,7 @@ public class SelectPicturesFragment extends Fragment implements View.OnClickList
             for (int i = 0; i < clipData.getItemCount() && i < MAX_NO_PICTURES_ALLOWED; i++) {
                 Uri uri = clipData.getItemAt(i).getUri();
                 if (Utilities.isFileSizeValid(this.requireContext(), uri, MAXIMUM_FILE_SIZE_ALLOWED)) {
-                    uploadData.pictures.add(clipData.getItemAt(i).getUri());
+                    UploadData.getInstance().mPictures.add(clipData.getItemAt(i).getUri());
                 } else {
                     Toast.makeText(getActivity(), "Size of " + Utilities.getRelativeName(this.requireContext(), uri) + " is more than " + MAXIMUM_FILE_SIZE_ALLOWED + " MB.", Toast.LENGTH_LONG).show();
                     areAllPicturesSizesValid = false;

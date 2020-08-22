@@ -30,7 +30,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Messages to be shown to user -->
-    <string name="onGalleryDeniedAccessMsg">Permissions not granted to access gallery.</string>
+    <string name="onGalleryDeniedAccessMsg">Permissions not granted to access gallery</string>
     <string name="onSelectBiodataGalleryTitleMsg">Select Biodata</string>
     <string name="onSelectPicturesGalleryTitleMsg">Select Pictures</string>
     <string name="emptyString" />
@@ -43,10 +43,15 @@
 
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
-    <string name="We_Are_Uploading_Your_Files">We Are Uploading Your Files</string>
-    <string name="Please_wait">Please wait … </string>
-    <string name="Files_Uploaded_Successfully">Files Uploaded Successfully!</string>
-    <string name="Biodata_under_review_and_will_take_couple_of_days_to_get_reflected">Biodata under review and will take couple of days to get reflected.</string>
-    <string name="No_internet_connection">No internet connection!</string>
     <string name="_100">100 %</string>
+    <string name="We_Are_Uploading_Your_Files">Upload In Progress</string>
+    <string name="Please_wait">Please wait … </string>
+    <string name="Files_Uploaded_Successfully">Uploaded Successful</string>
+    <string name="Biodata_under_review_and_will_take_couple_of_days_to_get_reflected">Biodata under review and will take couple of days to get reflected.</string>
+    <string name="upload_failure">Upload Failure</string>
+    <string name="please_try_again">Internet connection interrupted. Please try again.</string>
+    <string name="No_internet_connection">No internet connection.</string>
+    <string name="upload_limit_reached">Upload Limit Reached</string>
+    <string name="please_upload_after_an_hour">Please upload after an hour.</string>
+    <string name="upload_process_was_interrupted">Upload process was interrupted.</string>
 </resources>

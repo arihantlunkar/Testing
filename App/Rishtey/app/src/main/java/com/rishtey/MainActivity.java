@@ -1,18 +1,15 @@
 package com.rishtey;
 
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONObject;
+import com.rishtey.data.UploadData;
+import com.rishtey.fragments.SelectBiodataFragment;
+import com.rishtey.listeners.OnBackPressListener;
+import com.rishtey.util.Utilities;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,14 +18,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        UploadTaskServerCommunicator.UploadData uploadData = new UploadTaskServerCommunicator.UploadData();
-        uploadData.fromID = Utilities.getUploadID();
-
-        SelectBiodataFragment fragment = new SelectBiodataFragment();
-        fragment.setArguments(uploadData);
+        UploadData.getInstance().mFromID = Utilities.getUploadID();
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentPlace, fragment);
+        fragmentTransaction.replace(R.id.fragmentPlace, new SelectBiodataFragment());
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragmentPlace);
+        if (fragment instanceof OnBackPressListener && !((OnBackPressListener) fragment).onBackPressed()) {
+            return;
+        }
+        super.onBackPressed();
     }
 }

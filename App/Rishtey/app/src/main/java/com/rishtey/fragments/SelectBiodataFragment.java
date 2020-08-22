@@ -1,4 +1,4 @@
-package com.rishtey;
+package com.rishtey.fragments;
 
 import android.Manifest;
 import android.content.Intent;
@@ -13,14 +13,17 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.rishtey.R;
+import com.rishtey.data.UploadData;
+import com.rishtey.util.Utilities;
+
 import static android.app.Activity.RESULT_OK;
 
 public class SelectBiodataFragment extends Fragment implements View.OnClickListener {
 
     public static final int MAXIMUM_FILE_SIZE_ALLOWED = 5; // in MB
-    private static final int GALLERY_REQUEST_PERMISSIONS_CODE = 1;
     public static final String[] BIODATA_ALLOWED_MIME_TYPES = {"image/*", "application/pdf"};
-    private UploadTaskServerCommunicator.UploadData uploadData = null;
+    private static final int GALLERY_REQUEST_PERMISSIONS_CODE = 1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,16 +60,12 @@ public class SelectBiodataFragment extends Fragment implements View.OnClickListe
             return;
         }
         if (Utilities.isFileSizeValid(this.getContext(), data.getData(), MAXIMUM_FILE_SIZE_ALLOWED)) {
-            uploadData.bioData = data.getData();
+            UploadData.getInstance().mBioData = data.getData();
             gotoNextFragment();
         } else {
             Toast.makeText(getActivity(), "Size of " + Utilities.getRelativeName(this.getContext(), data.getData()) + " is more than " + MAXIMUM_FILE_SIZE_ALLOWED + " MB.", Toast.LENGTH_LONG).show();
 
         }
-    }
-
-    public void setArguments(@NonNull UploadTaskServerCommunicator.UploadData uploadData) {
-        this.uploadData = uploadData;
     }
 
     private void openGallery() {
@@ -78,12 +77,9 @@ public class SelectBiodataFragment extends Fragment implements View.OnClickListe
     }
 
     private void gotoNextFragment() {
-        SelectPicturesFragment fragment = new SelectPicturesFragment();
-        fragment.setArguments(uploadData);
-
         FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
-        fragmentTransaction.replace(R.id.fragmentPlace, fragment);
+        fragmentTransaction.replace(R.id.fragmentPlace, new SelectPicturesFragment());
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }

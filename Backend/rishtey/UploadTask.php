@@ -16,7 +16,7 @@ class UploadTask extends Task
 		if ($this->isFakeUser()) {
 			throw new CustomMessage(__CLASS__, Constants::FAILURE, 'Fake user upload', 1007);
 		}
-		if ($this->isUploadLimitReached() && false) {
+		if ($this->isUploadLimitReached()) {
 			throw new CustomMessage(__CLASS__, Constants::FAILURE, 'Upload limit reached', 2005);
 		}
 		$this->storeFiles();
