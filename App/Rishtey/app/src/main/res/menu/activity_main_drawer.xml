@@ -3,30 +3,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/menu_top"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
+            android:icon="@drawable/ic_menu_home_24"
+            android:title="@string/home" />
         <item
-            android:id="@+id/nav_my_biodata"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="My Biodata" />
-        <item
-            android:id="@+id/nav_upload_biodata"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Upload Biodata" />
-        <item
-            android:id="@+id/nav_ignored"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Blocked / Ignored" />
+            android:id="@+id/nav_sent"
+            android:icon="@drawable/ic_menu_sent_24"
+            android:title="@string/sent" />
         <item
             android:id="@+id/nav_wishlist"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Wishlist" />
+            android:icon="@drawable/ic_menu_favorite_24"
+            android:title="@string/wishlist" />
         <item
-            android:id="@+id/nav_login_logout"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Logout" />
+            android:id="@+id/nav_bin"
+            android:icon="@drawable/ic_menu_bin_24"
+            android:title="@string/bin" />
+        <item
+            android:id="@+id/nav_privacy_policy"
+            android:icon="@drawable/ic_menu_privacy_policy_24"
+            android:title="@string/privacy_policy" />
+    </group>
+	<group
+        android:id="@+id/menu_bottom"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/nav_upload"
+            android:icon="@drawable/ic_menu_upload_24"
+            android:title="@string/upload" />
+		<item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_menu_logout_24"
+            android:title="@string/menu_logout" />
     </group>
 </menu>

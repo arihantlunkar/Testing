@@ -24,12 +24,12 @@ import org.json.JSONObject;
         new LoginTaskServerCommunicator(this, ROOT_URL, loginData, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Toast.makeText(MainActivity.this, response.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(UploadActivity.this, response.toString(), Toast.LENGTH_LONG).show();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MainActivity.this, "No internet connection!", Toast.LENGTH_LONG).show();
+                Toast.makeText(UploadActivity.this, "No internet connection!", Toast.LENGTH_LONG).show();
             }
         }).trigger();
     } catch (JSONException e) {

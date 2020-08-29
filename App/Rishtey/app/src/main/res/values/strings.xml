@@ -36,8 +36,8 @@
     <string name="emptyString" />
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">Arihant Lunkar</string>
+    <string name="nav_header_subtitle">arihant-cse15@snu.edu.in</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
@@ -54,4 +54,12 @@
     <string name="upload_limit_reached">Upload Limit Reached</string>
     <string name="please_upload_after_an_hour">Please upload after an hour.</string>
     <string name="upload_process_was_interrupted">Upload process was interrupted.</string>
+    <string name="home">Home</string>
+    <string name="upload_biodata">Upload Biodata</string>
+    <string name="wishlist">Wishlist</string>
+    <string name="sent">Sent</string>
+    <string name="bin">Bin</string>
+    <string name="login">Login</string>
+    <string name="share">Share</string>
+    <string name="privacy_policy">Privacy Policy</string>
 </resources>
