@@ -15,13 +15,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.navigation.NavigationView;
-import com.rishtey.fragments.DummyHomeFragment;
-import com.rishtey.fragments.DummyUploadFragment;
 import com.rishtey.fragments.SentFragment;
 import com.rishtey.fragments.WishlistFragment;
 import com.rishtey.fragments.BinFragment;
 import com.rishtey.fragments.PrivacyPolicyFragment;
-import com.rishtey.fragments.LogoutFragment;
+import com.rishtey.ui.home.HomeFragment;
 
 import java.util.Objects;
 
@@ -48,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mActionBarDrawerToggle.syncState();
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentPlace, new DummyHomeFragment());
+        fragmentTransaction.replace(R.id.fragmentPlace, new HomeFragment());
         fragmentTransaction.commit();
         Objects.requireNonNull(getSupportActionBar()).setTitle(getString(R.string.menu_home));
         mNavigationView.setCheckedItem(R.id.nav_home);
@@ -76,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 			switch(item.getItemId()) {
 				case R.id.nav_home:
-					fragmentTransaction.replace(R.id.fragmentPlace, new DummyHomeFragment());
+					fragmentTransaction.replace(R.id.fragmentPlace, new HomeFragment());
 					break;
 				case R.id.nav_sent:
 					fragmentTransaction.replace(R.id.fragmentPlace, new SentFragment());
