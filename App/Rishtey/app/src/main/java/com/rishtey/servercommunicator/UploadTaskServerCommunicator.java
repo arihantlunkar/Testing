@@ -76,7 +76,7 @@ public class UploadTaskServerCommunicator implements TaskListener, Runnable {
 
     private Request createRequest(@NotNull MultipartBody.Builder multipartBody) {
         return new Request.Builder()
-                .url(Utilities.getRootURL())
+                .url(Utilities.getRootURL(true))
                 .post(multipartBody.build())
                 .tag(TAG)
                 .build();

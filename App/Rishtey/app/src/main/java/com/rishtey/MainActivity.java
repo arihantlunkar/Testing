@@ -19,7 +19,7 @@ import com.rishtey.fragments.SentFragment;
 import com.rishtey.fragments.WishlistFragment;
 import com.rishtey.fragments.BinFragment;
 import com.rishtey.fragments.PrivacyPolicyFragment;
-import com.rishtey.ui.home.HomeFragment;
+import com.rishtey.fragments.HomeFragment;
 
 import java.util.Objects;
 

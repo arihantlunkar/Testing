@@ -29,8 +29,8 @@ public class Utilities {
         return size <= expectedSize * 1024 * 1024;
     }
 
-    public static String getRootURL() {
-        return "http://192.168.0.10:8081/Testing/Backend/rishtey/index.php";
+    public static String getRootURL(boolean isMultiFormData) {
+        return "http://192.168.0.10:8081/Testing/Backend/rishtey/index.php?isMultiFormData=" + (isMultiFormData ? "yes" : "no");
     }
 
     public static String getUploadID() {
