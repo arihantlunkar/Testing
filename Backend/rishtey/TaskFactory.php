@@ -6,6 +6,8 @@ require_once ROOT_PATH . 'DownloadTask.php';
 require_once ROOT_PATH . 'FilterTask.php';
 require_once ROOT_PATH . 'SearchTask.php';
 require_once ROOT_PATH . 'DisplayTask.php';
+require_once ROOT_PATH . 'AdminSaveTask.php';
+require_once ROOT_PATH . 'AdminRetrieveTask.php';
 
 class TaskFactory
 {
@@ -49,7 +51,15 @@ class TaskFactory
 			case 'display':
 				$task = new DisplayTask($jsonDecodedPOSTData);
 				break;
-
+			
+			case 'admin_save':
+				$task = new AdminSaveTask($jsonDecodedPOSTData);
+				break;
+			
+			case 'admin_retrieve':
+				$task = new AdminRetrieveTask($jsonDecodedPOSTData);
+				break;
+				
 			default:
 				throw new CustomMessage(
 					__class__,

@@ -5,7 +5,7 @@ class DisplayTask extends Task
 {
 	public function trigger() : void
 	{
-		$stmt = $this->mConnection->prepare('SELECT * FROM `biodata`, (SELECT `biodataID` from upload ORDER BY `uploadTime` DESC LIMIT ?, 5) as extractedBiodata where biodata.id = extractedBiodata.biodataID');
+		$stmt = $this->mConnection->prepare('SELECT * FROM `biodata`, (SELECT `upload`.`biodataID` from `upload`, `verification` WHERE `verification`.`isVerified` = 1 AND `upload`.`biodataID` = `verification`.`biodataID` ORDER BY `uploadTime` DESC LIMIT ?, 5) as extractedBiodata where `biodata`.`id` = extractedBiodata.biodataID');
 		if (false === $stmt) {
 			throw new CustomMessage(
 				__class__,
