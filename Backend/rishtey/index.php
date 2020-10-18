@@ -12,9 +12,9 @@ try {
 	if ('POST' !== $_SERVER['REQUEST_METHOD']) {
 		throw new CustomMessage(__class__, Constants::FAILURE, 'Only POST request allowed', 1001);
 	}
-	$jsonDecodedPOSTData = json_decode(json_encode($_POST));
+	$jsonDecodedPOSTData = ((0 === strcmp($_GET['isMultiFormData'],'yes')) ? json_decode(json_encode($_POST)) /* for upload */ : json_decode(file_get_contents('php://input'))); 
 	TaskFactory::get($jsonDecodedPOSTData)->trigger();
 } catch (CustomMessage $e) {
-	header('Content-Type: applicatiosn/json');
+	header('Content-Type: application/json');
 	echo $e->get();
 }
